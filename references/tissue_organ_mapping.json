@@ -1,0 +1,296 @@
+{
+  "cerebral cortex": {
+    "organ_system": "Central Nervous System",
+    "organ": "brain",
+    "color": "#7B1FA2",
+    "uberon_id": "UBERON:0000956"
+  },
+  "cerebellum": {
+    "organ_system": "Central Nervous System",
+    "organ": "brain",
+    "color": "#7B1FA2",
+    "uberon_id": "UBERON:0002037"
+  },
+  "hippocampus": {
+    "organ_system": "Central Nervous System",
+    "organ": "brain",
+    "color": "#7B1FA2",
+    "uberon_id": "UBERON:0002421"
+  },
+  "caudate": {
+    "organ_system": "Central Nervous System",
+    "organ": "brain",
+    "color": "#7B1FA2",
+    "uberon_id": "UBERON:0001873"
+  },
+  "hypothalamus": {
+    "organ_system": "Central Nervous System",
+    "organ": "brain",
+    "color": "#7B1FA2",
+    "uberon_id": "UBERON:0001898"
+  },
+  "choroid plexus": {
+    "organ_system": "Central Nervous System",
+    "organ": "brain",
+    "color": "#7B1FA2",
+    "uberon_id": "UBERON:0001886"
+  },
+  "heart muscle": {
+    "organ_system": "Cardiovascular",
+    "organ": "heart",
+    "color": "#D32F2F",
+    "uberon_id": "UBERON:0002049"
+  },
+  "liver": {
+    "organ_system": "Digestive",
+    "organ": "liver",
+    "color": "#388E3C",
+    "uberon_id": "UBERON:0002107"
+  },
+  "gallbladder": {
+    "organ_system": "Digestive",
+    "organ": "gallbladder",
+    "color": "#388E3C",
+    "uberon_id": "UBERON:0002110"
+  },
+  "pancreas": {
+    "organ_system": "Digestive",
+    "organ": "pancreas",
+    "color": "#388E3C",
+    "uberon_id": "UBERON:0001264"
+  },
+  "oral mucosa": {
+    "organ_system": "Digestive",
+    "organ": "oral cavity",
+    "color": "#388E3C",
+    "uberon_id": "UBERON:0003343"
+  },
+  "salivary gland": {
+    "organ_system": "Digestive",
+    "organ": "salivary gland",
+    "color": "#388E3C",
+    "uberon_id": "UBERON:0001044"
+  },
+  "esophagus": {
+    "organ_system": "Digestive",
+    "organ": "esophagus",
+    "color": "#388E3C",
+    "uberon_id": "UBERON:0001043"
+  },
+  "stomach": {
+    "organ_system": "Digestive",
+    "organ": "stomach",
+    "color": "#388E3C",
+    "uberon_id": "UBERON:0000945"
+  },
+  "duodenum": {
+    "organ_system": "Digestive",
+    "organ": "small intestine",
+    "color": "#388E3C",
+    "uberon_id": "UBERON:0002114"
+  },
+  "small intestine": {
+    "organ_system": "Digestive",
+    "organ": "small intestine",
+    "color": "#388E3C",
+    "uberon_id": "UBERON:0002108"
+  },
+  "colon": {
+    "organ_system": "Digestive",
+    "organ": "large intestine",
+    "color": "#388E3C",
+    "uberon_id": "UBERON:0001155"
+  },
+  "rectum": {
+    "organ_system": "Digestive",
+    "organ": "large intestine",
+    "color": "#388E3C",
+    "uberon_id": "UBERON:0001052"
+  },
+  "thyroid gland": {
+    "organ_system": "Endocrine",
+    "organ": "thyroid",
+    "color": "#F57C00",
+    "uberon_id": "UBERON:0002046"
+  },
+  "parathyroid gland": {
+    "organ_system": "Endocrine",
+    "organ": "parathyroid",
+    "color": "#F57C00",
+    "uberon_id": "UBERON:0001132"
+  },
+  "adrenal gland": {
+    "organ_system": "Endocrine",
+    "organ": "adrenal gland",
+    "color": "#F57C00",
+    "uberon_id": "UBERON:0002369"
+  },
+  "pituitary gland": {
+    "organ_system": "Endocrine",
+    "organ": "pituitary",
+    "color": "#F57C00",
+    "uberon_id": "UBERON:0000007"
+  },
+  "lymph node": {
+    "organ_system": "Immune / Lymphoid",
+    "organ": "lymph node",
+    "color": "#C2185B",
+    "uberon_id": "UBERON:0000029"
+  },
+  "tonsil": {
+    "organ_system": "Immune / Lymphoid",
+    "organ": "tonsil",
+    "color": "#C2185B",
+    "uberon_id": "UBERON:0002372"
+  },
+  "spleen": {
+    "organ_system": "Immune / Lymphoid",
+    "organ": "spleen",
+    "color": "#C2185B",
+    "uberon_id": "UBERON:0002106"
+  },
+  "thymus": {
+    "organ_system": "Immune / Lymphoid",
+    "organ": "thymus",
+    "color": "#C2185B",
+    "uberon_id": "UBERON:0002370"
+  },
+  "bone marrow": {
+    "organ_system": "Immune / Lymphoid",
+    "organ": "bone marrow",
+    "color": "#C2185B",
+    "uberon_id": "UBERON:0002371"
+  },
+  "appendix": {
+    "organ_system": "Immune / Lymphoid",
+    "organ": "appendix",
+    "color": "#C2185B",
+    "uberon_id": "UBERON:0001154"
+  },
+  "skeletal muscle": {
+    "organ_system": "Musculoskeletal",
+    "organ": "muscle",
+    "color": "#5D4037",
+    "uberon_id": "UBERON:0001134"
+  },
+  "smooth muscle": {
+    "organ_system": "Musculoskeletal",
+    "organ": "smooth muscle",
+    "color": "#5D4037",
+    "uberon_id": "UBERON:0001135"
+  },
+  "soft tissue": {
+    "organ_system": "Musculoskeletal",
+    "organ": "connective tissue",
+    "color": "#5D4037",
+    "uberon_id": "UBERON:0002384"
+  },
+  "adipose tissue": {
+    "organ_system": "Musculoskeletal",
+    "organ": "adipose tissue",
+    "color": "#5D4037",
+    "uberon_id": "UBERON:0001013"
+  },
+  "testis": {
+    "organ_system": "Reproductive",
+    "organ": "testis",
+    "color": "#0288D1",
+    "uberon_id": "UBERON:0000473"
+  },
+  "epididymis": {
+    "organ_system": "Reproductive",
+    "organ": "epididymis",
+    "color": "#0288D1",
+    "uberon_id": "UBERON:0001301"
+  },
+  "prostate": {
+    "organ_system": "Reproductive",
+    "organ": "prostate",
+    "color": "#0288D1",
+    "uberon_id": "UBERON:0002367"
+  },
+  "seminal vesicle": {
+    "organ_system": "Reproductive",
+    "organ": "seminal vesicle",
+    "color": "#0288D1",
+    "uberon_id": "UBERON:0000998"
+  },
+  "ovary": {
+    "organ_system": "Reproductive",
+    "organ": "ovary",
+    "color": "#0288D1",
+    "uberon_id": "UBERON:0000992"
+  },
+  "fallopian tube": {
+    "organ_system": "Reproductive",
+    "organ": "fallopian tube",
+    "color": "#0288D1",
+    "uberon_id": "UBERON:0003889"
+  },
+  "endometrium": {
+    "organ_system": "Reproductive",
+    "organ": "uterus",
+    "color": "#0288D1",
+    "uberon_id": "UBERON:0001295"
+  },
+  "cervix": {
+    "organ_system": "Reproductive",
+    "organ": "cervix",
+    "color": "#0288D1",
+    "uberon_id": "UBERON:0000002"
+  },
+  "vagina": {
+    "organ_system": "Reproductive",
+    "organ": "vagina",
+    "color": "#0288D1",
+    "uberon_id": "UBERON:0000996"
+  },
+  "breast": {
+    "organ_system": "Reproductive",
+    "organ": "breast",
+    "color": "#0288D1",
+    "uberon_id": "UBERON:0000310"
+  },
+  "placenta": {
+    "organ_system": "Reproductive",
+    "organ": "placenta",
+    "color": "#0288D1",
+    "uberon_id": "UBERON:0001987"
+  },
+  "lung": {
+    "organ_system": "Respiratory",
+    "organ": "lung",
+    "color": "#0097A7",
+    "uberon_id": "UBERON:0002048"
+  },
+  "bronchus": {
+    "organ_system": "Respiratory",
+    "organ": "bronchus",
+    "color": "#0097A7",
+    "uberon_id": "UBERON:0002185"
+  },
+  "nasopharynx": {
+    "organ_system": "Respiratory",
+    "organ": "nasopharynx",
+    "color": "#0097A7",
+    "uberon_id": "UBERON:0001728"
+  },
+  "kidney": {
+    "organ_system": "Urinary",
+    "organ": "kidney",
+    "color": "#E64A19",
+    "uberon_id": "UBERON:0002113"
+  },
+  "urinary bladder": {
+    "organ_system": "Urinary",
+    "organ": "urinary bladder",
+    "color": "#E64A19",
+    "uberon_id": "UBERON:0001255"
+  },
+  "skin": {
+    "organ_system": "Integumentary",
+    "organ": "skin",
+    "color": "#AFB42B",
+    "uberon_id": "UBERON:0002097"
+  }
+}

@@ -1,0 +1,2 @@
+Notification: Please check the Human Protein Atlas terms of use and licensing at https://www.proteinatlas.org/about/licence. HPA data is freely accessible under Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0).
+Timestamp: 2026-09-18T21:24:57Z

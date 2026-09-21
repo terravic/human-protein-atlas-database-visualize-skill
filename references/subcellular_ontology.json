@@ -1,0 +1,247 @@
+{
+  "Nucleoplasm": {
+    "go_id": "GO:0005654",
+    "category": "Nuclear",
+    "svg_element_id": "cell-organelle-nucleoplasm",
+    "color": "#9C27B0",
+    "description": "The portion of the cell nucleus containing chromatin and non-nucleolar components."
+  },
+  "Nuclear speckles": {
+    "go_id": "GO:0016607",
+    "category": "Nuclear",
+    "svg_element_id": "cell-organelle-speckles",
+    "color": "#BA68C8",
+    "description": "Nuclear domains enriched in pre-mRNA splicing factors."
+  },
+  "Nucleoli": {
+    "go_id": "GO:0005730",
+    "category": "Nuclear",
+    "svg_element_id": "cell-organelle-nucleoli",
+    "color": "#7B1FA2",
+    "description": "Dense sub-nuclear organelle site of rRNA synthesis and ribosome biogenesis."
+  },
+  "Nucleoli fibrillar center": {
+    "go_id": "GO:0001650",
+    "category": "Nuclear",
+    "svg_element_id": "cell-organelle-nucleoli-fc",
+    "color": "#6A1B9A",
+    "description": "Central sub-compartment of the nucleolus where rDNA transcription occurs."
+  },
+  "Nucleoli rim": {
+    "go_id": "GO:0005730",
+    "category": "Nuclear",
+    "svg_element_id": "cell-organelle-nucleoli-rim",
+    "color": "#8E24AA",
+    "description": "Peripheral granular component surrounding the nucleolus."
+  },
+  "Nuclear bodies": {
+    "go_id": "GO:0016604",
+    "category": "Nuclear",
+    "svg_element_id": "cell-organelle-nuclear-bodies",
+    "color": "#AB47BC",
+    "description": "Non-membrane-bound nuclear structures including PML and Cajal bodies."
+  },
+  "Nuclear membrane": {
+    "go_id": "GO:0031965",
+    "category": "Nuclear",
+    "svg_element_id": "cell-organelle-nuclear-membrane",
+    "color": "#7E57C2",
+    "description": "Double lipid bilayer enclosing the nucleus and separating it from the cytoplasm."
+  },
+  "Nuclear pore complex": {
+    "go_id": "GO:0005643",
+    "category": "Nuclear",
+    "svg_element_id": "cell-organelle-nuclear-pores",
+    "color": "#5E35B1",
+    "description": "Macromolecular channels spanning the nuclear envelope mediating nucleocytoplasmic transport."
+  },
+  "Mitotic chromosome": {
+    "go_id": "GO:0000794",
+    "category": "Nuclear",
+    "svg_element_id": "cell-organelle-chromosome",
+    "color": "#4A148C",
+    "description": "Condensed chromatin structures formed during cell division."
+  },
+  "Cytosol": {
+    "go_id": "GO:0005829",
+    "category": "Cytoplasmic",
+    "svg_element_id": "cell-organelle-cytosol",
+    "color": "#64B5F6",
+    "description": "Fluid component of the cytoplasm excluding membrane-bound organelles."
+  },
+  "Cytoplasmic bodies": {
+    "go_id": "GO:0000932",
+    "category": "Cytoplasmic",
+    "svg_element_id": "cell-organelle-cytoplasmic-bodies",
+    "color": "#42A5F5",
+    "description": "Discrete ribonucleoprotein granules in the cytosol including P-bodies and stress granules."
+  },
+  "Aggresome": {
+    "go_id": "GO:0016235",
+    "category": "Cytoplasmic",
+    "svg_element_id": "cell-organelle-aggresome",
+    "color": "#1E88E5",
+    "description": "Perinuclear inclusion body where misfolded proteins are sequestered."
+  },
+  "Rods & rings": {
+    "go_id": "GO:0005737",
+    "category": "Cytoplasmic",
+    "svg_element_id": "cell-organelle-rods-rings",
+    "color": "#1976D2",
+    "description": "Filamentous polymeric metabolic enzyme structures within the cytoplasm."
+  },
+  "Mitochondria": {
+    "go_id": "GO:0005739",
+    "category": "Organelles",
+    "svg_element_id": "cell-organelle-mitochondria",
+    "color": "#FF7043",
+    "description": "Double-membrane-bound energy producing organelle."
+  },
+  "Peroxisomes": {
+    "go_id": "GO:0005777",
+    "category": "Organelles",
+    "svg_element_id": "cell-organelle-peroxisomes",
+    "color": "#EF5350",
+    "description": "Oxidative organelles involved in fatty acid beta-oxidation and reactive oxygen detoxification."
+  },
+  "Lysosomes": {
+    "go_id": "GO:0005764",
+    "category": "Organelles",
+    "svg_element_id": "cell-organelle-lysosomes",
+    "color": "#EC407A",
+    "description": "Acidic membrane-bound organelles containing hydrolytic enzymes for macromolecule degradation."
+  },
+  "Endosomes": {
+    "go_id": "GO:0005768",
+    "category": "Organelles",
+    "svg_element_id": "cell-organelle-endosomes",
+    "color": "#F06292",
+    "description": "Membrane-bound sorting compartments in the endocytic transport pathway."
+  },
+  "Lipid droplets": {
+    "go_id": "GO:0005811",
+    "category": "Organelles",
+    "svg_element_id": "cell-organelle-lipid-droplets",
+    "color": "#FDD835",
+    "description": "Neutral lipid storage organelles bounded by a phospholipid monolayer."
+  },
+  "Endoplasmic reticulum": {
+    "go_id": "GO:0005783",
+    "category": "Secretory Pathway",
+    "svg_element_id": "cell-organelle-er",
+    "color": "#FFA726",
+    "description": "Network of interconnected tubules involved in protein synthesis and lipid metabolism."
+  },
+  "Golgi apparatus": {
+    "go_id": "GO:0005794",
+    "category": "Secretory Pathway",
+    "svg_element_id": "cell-organelle-golgi",
+    "color": "#FFCA28",
+    "description": "Membrane stacks modifying, sorting, and packaging proteins for secretion."
+  },
+  "Vesicles": {
+    "go_id": "GO:0031982",
+    "category": "Secretory Pathway",
+    "svg_element_id": "cell-organelle-vesicles",
+    "color": "#26A69A",
+    "description": "Small enclosed membrane spheres mediating intracellular transport."
+  },
+  "Secreted": {
+    "go_id": "GO:0005576",
+    "category": "Secretory Pathway",
+    "svg_element_id": "cell-organelle-secreted",
+    "color": "#00897B",
+    "description": "Proteins actively exported into the extracellular space."
+  },
+  "Plasma membrane": {
+    "go_id": "GO:0005886",
+    "category": "Membrane",
+    "svg_element_id": "cell-organelle-plasma-membrane",
+    "color": "#4DB6AC",
+    "description": "Phospholipid bilayer bounding the outer boundary of the cell."
+  },
+  "Cell junctions": {
+    "go_id": "GO:0030054",
+    "category": "Membrane",
+    "svg_element_id": "cell-organelle-cell-junctions",
+    "color": "#00ACC1",
+    "description": "Multiprotein complexes anchoring adjacent cells or linking cells to the extracellular matrix."
+  },
+  "Focal adhesion sites": {
+    "go_id": "GO:0005925",
+    "category": "Membrane",
+    "svg_element_id": "cell-organelle-focal-adhesions",
+    "color": "#0097A7",
+    "description": "Integrin-containing mechanical linkages between intracellular actin bundles and extracellular substrate."
+  },
+  "Centrosome": {
+    "go_id": "GO:0005813",
+    "category": "Cytoskeleton",
+    "svg_element_id": "cell-organelle-centrosome",
+    "color": "#AB47BC",
+    "description": "Main microtubule-organizing center of animal cells."
+  },
+  "Microtubules": {
+    "go_id": "GO:0005874",
+    "category": "Cytoskeleton",
+    "svg_element_id": "cell-organelle-microtubules",
+    "color": "#26C6DA",
+    "description": "Tubular polymers of alpha- and beta-tubulin forming the intracellular transport network."
+  },
+  "Microtubule ends": {
+    "go_id": "GO:0035371",
+    "category": "Cytoskeleton",
+    "svg_element_id": "cell-organelle-microtubule-ends",
+    "color": "#00BCD4",
+    "description": "Dynamic plus and minus growing/shrinking tips of microtubules."
+  },
+  "Actin filaments": {
+    "go_id": "GO:0015629",
+    "category": "Cytoskeleton",
+    "svg_element_id": "cell-organelle-actin",
+    "color": "#29B6F6",
+    "description": "Linear microfilaments providing structural support and cell motility."
+  },
+  "Intermediate filaments": {
+    "go_id": "GO:0005882",
+    "category": "Cytoskeleton",
+    "svg_element_id": "cell-organelle-intermediate-filaments",
+    "color": "#66BB6A",
+    "description": "Rope-like cytoskeletal fibers imparting tensile strength to the cell."
+  },
+  "Mitotic spindle": {
+    "go_id": "GO:0072686",
+    "category": "Cytoskeleton",
+    "svg_element_id": "cell-organelle-mitotic-spindle",
+    "color": "#9CCC65",
+    "description": "Bipolar microtubule apparatus segregating chromosomes during mitosis."
+  },
+  "Cytokinetic bridge": {
+    "go_id": "GO:0045171",
+    "category": "Cytoskeleton",
+    "svg_element_id": "cell-organelle-cytokinetic-bridge",
+    "color": "#7CB342",
+    "description": "Transient intercellular constriction connecting daughter cells at the end of mitosis."
+  },
+  "Midbody": {
+    "go_id": "GO:0030496",
+    "category": "Cytoskeleton",
+    "svg_element_id": "cell-organelle-midbody",
+    "color": "#558B2F",
+    "description": "Dense proteinaceous structure within the cytokinetic bridge governing abscission."
+  },
+  "Midbody ring": {
+    "go_id": "GO:0090543",
+    "category": "Cytoskeleton",
+    "svg_element_id": "cell-organelle-midbody-ring",
+    "color": "#33691E",
+    "description": "Ring-shaped assembly flanking the midbody during cytokinesis."
+  },
+  "Primary cilium": {
+    "go_id": "GO:0005929",
+    "category": "Cytoskeleton",
+    "svg_element_id": "cell-organelle-cilium",
+    "color": "#80CBC4",
+    "description": "Microtubule-based sensory projection extending from the cell surface."
+  }
+}

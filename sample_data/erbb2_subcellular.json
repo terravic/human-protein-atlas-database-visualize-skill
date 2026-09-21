@@ -1,0 +1,19 @@
+{
+  "ensembl_id": "ENSG00000141736",
+  "gene_symbol": "ERBB2",
+  "reliability": "Enhanced",
+  "locations_all": [
+    "Plasma membrane",
+    "Cell junctions",
+    "Cytosol",
+    "Vesicles"
+  ],
+  "main_locations": [
+    "Plasma membrane",
+    "Cell junctions"
+  ],
+  "additional_locations": [
+    "Cytosol",
+    "Vesicles"
+  ]
+}

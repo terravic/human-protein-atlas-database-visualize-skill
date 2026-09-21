@@ -1,0 +1,5 @@
+# External Python dependencies for human-protein-atlas-database-visualize
+# Standard library fallback (urllib.request, xml.etree.ElementTree) is included
+# automatically when polite-http or urllib3 are unavailable.
+urllib3>=2.0.0
+pytest>=7.0.0

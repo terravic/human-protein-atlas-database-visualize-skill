@@ -1,0 +1,15 @@
+{
+  "ensembl_id": "ENSG00000141510",
+  "gene_symbol": "TP53",
+  "reliability": "Approved",
+  "locations_all": [
+    "Nucleoplasm",
+    "Cytosol"
+  ],
+  "main_locations": [
+    "Nucleoplasm"
+  ],
+  "additional_locations": [
+    "Cytosol"
+  ]
+}

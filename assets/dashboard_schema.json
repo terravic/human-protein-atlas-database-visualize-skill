@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HPA Dashboard Data Island Schema",
+  "type": "object",
+  "required": [
+    "gene_symbol",
+    "ensembl_id",
+    "uniprot_id",
+    "gene_description",
+    "validation_status",
+    "rna_protein_agreement",
+    "subcellular_summary",
+    "tissue_ihc_summary",
+    "concordance_summary",
+    "pathology_summary"
+  ],
+  "properties": {
+    "gene_symbol": {"type": "string"},
+    "ensembl_id": {"type": "string", "pattern": "^ENSG[0-9]+$"},
+    "uniprot_id": {"type": "string"},
+    "gene_description": {"type": "string"},
+    "gene_synonyms": {"type": "array", "items": {"type": "string"}},
+    "validation_status": {"type": "string"},
+    "rna_protein_agreement": {
+      "type": "object",
+      "required": ["reliability", "description"],
+      "properties": {
+        "reliability": {"type": "string"},
+        "description": {"type": "string"}
+      }
+    },
+    "subcellular_summary": {
+      "type": "object",
+      "required": ["main_locations", "additional_locations", "locations_all", "active_organelle_ids"],
+      "properties": {
+        "main_locations": {"type": "array", "items": {"type": "string"}},
+        "additional_locations": {"type": "array", "items": {"type": "string"}},
+        "locations_all": {"type": "array", "items": {"type": "string"}},
+        "active_organelle_ids": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "tissue_ihc_summary": {
+      "type": "object",
+      "required": [
+        "total_tissues_profiled",
+        "high_expression_count",
+        "medium_expression_count",
+        "low_expression_count",
+        "not_detected_count",
+        "organ_systems"
+      ]
+    },
+    "concordance_summary": {
+      "type": "object",
+      "required": ["concordance_score", "concordance_classification", "discordant_tissues"]
+    },
+    "pathology_summary": {
+      "type": "object",
+      "required": ["prognostic_status", "cancer_types_summary"]
+    }
+  }
+}
