@@ -4,7 +4,7 @@ description: >
   Retrieve, analyze, and visualize semi-quantitative protein expression, spatial
   subcellular localization, and RNA-to-protein concordance from the Human Protein
   Atlas (HPA). Generates interactive standalone HTML5 dashboards featuring
-  3D physics-based cellular/organelle and organ-system network viewports,
+  3D structural data diagrams, interactive relationship node maps,
   vector-rendered eukaryotic organelle maps, anatomical organ-system IHC heatmaps,
   and cancer pathology profiles. Use when the user asks to analyze, visualize, or
   profile protein abundance, cellular location, or immunohistochemistry across
@@ -14,23 +14,23 @@ description: >
 # Human Protein Atlas Database Visualize
 
 ## Overview
-This skill provides programmatic queries, spatial subcellular localization mapping, anatomical IHC scoring, and interactive standalone HTML5 dashboards using data from the Human Protein Atlas (HPA). It combines semi-quantitative IHC protein abundance across 44+ normal human tissues with confocal microscopy-based subcellular organelle localization, RNA-protein concordance metrics, and hybrid 3D physics + 2D vector visualizations.
+This skill provides programmatic queries, spatial subcellular localization mapping, anatomical IHC scoring, and interactive standalone HTML5 dashboards using data from the Human Protein Atlas (HPA). It combines semi-quantitative IHC protein abundance across 44+ normal human tissues with confocal microscopy-based subcellular organelle localization, RNA-protein concordance metrics, 3D structural data diagrams, bipartite relationship node maps, and 2D vector visualizations.
 
 ## Prerequisites
 1. **Python Environment**: Python >= 3.10 with `polite-http` (or standard library fallback).
-2. **License Guard**: Verify that `.licenses/human_protein_atlas_database_visualize_LICENSE.txt` exists in the workspace root. If absent, display the licensing notice and create the file with an ISO timestamp before querying.
+2. **License Guard**: Verify that `.licenses/human_protein_atlas_database_visualize_LICENSE.txt` exists in the workspace root. If absent, display the licensing notice and create the file with an ISO 8601 UTC timestamp before querying.
 
 ## Core Rules
-- **Execute Utility Scripts**: Always invoke the provided Python scripts in `scripts/`. Never execute un-rate-limited HTTP requests directly against `proteinatlas.org`.
+- **Execute Utility Scripts**: Invoke the provided Python scripts in `scripts/`. Do not execute un-rate-limited HTTP requests directly against `proteinatlas.org`.
 - **Rate Limiting Compliance**: Enforce 2.0 QPS request pacing to respect Human Protein Atlas API infrastructure.
-- **Process Data Before Rendering UI**: Always run the data retrieval and enrichment pipeline (`scripts/run_pipeline.py` or modular scripts) on the user's requested gene/protein first so that `dashboard.html` displays the actual processed data.
-- **Mandatory Dashboard Artifact Emission**: When generating or updating the interactive HTML dashboard, you MUST emit the standalone HTML file as a user-facing artifact named `dashboard.html` using `write_to_file` with `ArtifactMetadata: { UserFacing: true, Summary: "Interactive Evaluation Dashboard", RequestFeedback: false }` (in addition to keeping `dashboard.html` updated in the project root/output directory). This ensures the dashboard immediately opens and renders directly in the agent harness preview pane without requiring the user to manually copy or open links in an external browser.
-- **Icon-Only Light/Dark Theme Toggle**: Maintain the icon-only Light/Dark theme switcher button in the dashboard header containing only the SVG Sun and Moon vector icons.
-- **Attribution**: State in output that Human Protein Atlas Database Visualize was used, citing Uhlén et al. (Science 2015) and Thul et al. (Science 2017).
+- **Process Data Before Rendering UI**: Run the data retrieval and enrichment pipeline (`scripts/run_pipeline.py` or modular scripts) on the requested gene or protein first so that `dashboard.html` displays the computed data.
+- **Standalone Dashboard Output**: Keep `./dashboard.html` updated in the project root directory and target output directory (`-o`) so it can be opened directly from disk or served over HTTP with Server-Sent Events (SSE).
+- **Three-Icon Theme Selector**: Maintain the segmented three-icon theme selector (`#theme-btn-light`, `#theme-btn-dark`, `#theme-btn-system`) in the top navigation bar with automatic OS appearance tracking.
+- **Attribution**: State in output that Human Protein Atlas Database Visualize was used, citing Uhlen et al. (Science 2015) and Thul et al. (Science 2017).
 
 ## Workflows
 
-### 1. Unified End-to-End Pipeline (Recommended)
+### 1. Unified End-to-End Pipeline
 Run full protein profiling, subcellular mapping, and dashboard compilation:
 ```bash
 python3 scripts/run_pipeline.py --gene TP53 -o ./output/TP53/
@@ -41,14 +41,12 @@ Profile by Ensembl ID with tissue filtering:
 python3 scripts/run_pipeline.py --ensembl_id ENSG00000141736 --tissues "cerebral cortex,liver,heart muscle" -o ./output/ERBB2_tissues/
 ```
 
-Deterministic offline mock mode (for sandboxed testing without network):
+Deterministic offline mock mode (for testing without network access):
 ```bash
 python3 scripts/run_pipeline.py --gene TP53 -o ./output/mock_tp53/ --mock
 ```
 
-After `run_pipeline.py` completes and outputs `dashboard.html`:
-1. Copy or write the generated `dashboard.html` to the project root (`./dashboard.html`) for local testing.
-2. Emit `dashboard.html` to the agent harness artifact directory using `write_to_file` with `ArtifactMetadata: { UserFacing: true, Summary: "Interactive Evaluation Dashboard", RequestFeedback: false }`.
+When `scripts/run_pipeline.py` completes, it writes the compiled `dashboard.html` to both the specified output directory and `./dashboard.html` at the project root.
 
 ### 2. Modular Subcommands
 Query raw endpoints directly using `scripts/hpa_cli.py`:
@@ -70,7 +68,7 @@ python3 scripts/hpa_cli.py search-hpa --query "tissue_category_rna:Brain;Tissue 
 ```
 
 ### 3. Specialized Visualization & Analytical Modules
-Invoke individual enrichment and visualization scripts directly when custom intermediate artifacts are needed:
+Invoke individual enrichment and visualization scripts directly when custom intermediate outputs are needed:
 ```bash
 # Enrich subcellular locations with GO terms and generate interactive SVG cell schematic
 python3 scripts/visualize_subcellular.py \

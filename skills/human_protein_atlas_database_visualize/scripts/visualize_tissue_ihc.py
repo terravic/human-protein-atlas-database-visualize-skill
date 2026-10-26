@@ -40,11 +40,13 @@ LEVEL_TO_SCORE: Dict[str, int] = {
     "not detected": 0,
 }
 
+# Heatmap concentration color transition:
+# Surface Background (Not detected) -> Vibrant Teal (#0D9488) -> Vivid Indigo (#4F46E5) -> Deep Rose (#E11D48)
 BADGE_COLORS: Dict[str, str] = {
-    "High": "#DC2626",
-    "Medium": "#D97706",
-    "Low": "#2563EB",
-    "Not detected": "#9CA3AF",
+    "High": "#E11D48",
+    "Medium": "#4F46E5",
+    "Low": "#0D9488",
+    "Not detected": "#787774",
 }
 
 CANONICAL_ORGAN_SYSTEMS: List[str] = [
@@ -104,7 +106,7 @@ def analyze_tissue_ihc(
         meta = organ_map_lower.get(tissue_name.lower(), {
             "organ_system": "Musculoskeletal",
             "organ": tissue_name.lower(),
-            "color": "#64748B",
+            "color": "#0D9488",
             "uberon_id": "UBERON:0000479",
         })
         sys_name = meta.get("organ_system", "Musculoskeletal")
@@ -118,11 +120,10 @@ def analyze_tissue_ihc(
             "score": score,
             "cell_type": entry.get("cell_type", "glandular cells"),
             "uberon_id": meta.get("uberon_id", "UBERON:0000479"),
-            "color": meta.get("color", "#64748B"),
+            "color": meta.get("color", "#0D9488"),
             "badge_color": BADGE_COLORS[canonical_level],
         })
 
-    # Remove empty systems if tissue filtering was applied, while computing aggregate scores
     organ_system_metrics: Dict[str, Dict[str, Any]] = {}
     non_empty_systems: Dict[str, List[Dict[str, Any]]] = {}
     for sys_name, items in organ_systems.items():
@@ -132,12 +133,20 @@ def analyze_tissue_ihc(
         non_empty_systems[sys_name] = items_sorted
         mean_score = round(sum(float(i["score"]) for i in items_sorted) / len(items_sorted), 2)
         max_score = max(i["score"] for i in items_sorted)
+        if mean_score >= 2.2:
+            sys_color = "#E11D48"
+        elif mean_score >= 1.5:
+            sys_color = "#4F46E5"
+        elif mean_score >= 0.5:
+            sys_color = "#0D9488"
+        else:
+            sys_color = "#787774"
         organ_system_metrics[sys_name] = {
             "organ_system": sys_name,
             "tissue_count": len(items_sorted),
             "organ_score": mean_score,
             "max_score": max_score,
-            "system_color": items_sorted[0].get("color", "#475569"),
+            "system_color": sys_color,
         }
 
     ranked_systems = sorted(
@@ -161,7 +170,7 @@ def analyze_tissue_ihc(
 
 
 def render_tissue_ihc_html(summary: Dict[str, Any]) -> str:
-    """Render grouped anatomical system cards and categorical IHC heatmap badges."""
+    """Render single-level bento cells and flat row dividers for anatomical IHC scores."""
     cards_html: List[str] = []
     organ_systems = summary.get("organ_systems", {})
     ranked_meta = summary.get("ranked_organ_systems", [])
@@ -181,23 +190,33 @@ def render_tissue_ihc_html(summary: Dict[str, Any]) -> str:
             c_type = html.escape(t["cell_type"])
             lvl = html.escape(t["level"])
             scr = t["score"]
+            if scr == 0:
+                badge_html = (
+                    f'<span class="px-2 py-0.5 rounded font-mono text-xs" '
+                    f'style="border: 1px solid var(--border-color); color: var(--text-secondary);">'
+                    f'{lvl} ({scr})</span>'
+                )
+            else:
+                badge_html = (
+                    f'<span class="px-2 py-0.5 rounded font-mono font-semibold text-xs text-white" '
+                    f'style="background-color:{badge_bg};">{lvl} ({scr})</span>'
+                )
             rows.append(
-                f'<div class="flex items-center justify-between py-1.5 px-2 rounded text-xs" style="border: 1px solid var(--border-card);">'
+                f'<div class="flex items-center justify-between py-2 border-b text-xs" style="border-color: var(--border-color);">'
                 f'<div><span class="font-semibold capitalize">{t_name}</span> '
-                f'<span style="color: var(--text-secondary);">({u_id}, {c_type})</span></div>'
-                f'<span class="px-2 py-0.5 rounded font-semibold text-white" style="background-color:{badge_bg}">'
-                f'{lvl} ({scr})</span></div>'
+                f'<span class="font-mono" style="color: var(--text-secondary);">({u_id}, {c_type})</span></div>'
+                f'{badge_html}</div>'
             )
 
         cards_html.append(
-            f'<div class="organ-system-card dashboard-card p-4 rounded-xl shadow-sm" style="background-color: var(--bg-card); border: 1px solid var(--border-card);">'
+            f'<div class="organ-system-card dashboard-card p-4">'
             f'<div class="flex items-center justify-between mb-2">'
             f'<span class="font-bold text-sm" style="color:{sys_color}">{html.escape(sys_name)}</span>'
-            f'<span class="text-xs font-mono px-2 py-0.5 rounded subtle-panel">'
+            f'<span class="text-xs font-mono" style="color: var(--text-secondary);">'
             f'Mean Score: {organ_score:.2f} / 3.00</span></div>'
-            f'<div class="w-full h-2 rounded-full overflow-hidden mb-3" style="background-color: var(--bg-subtle);">'
-            f'<div class="h-full rounded-full" style="width:{pct}%;background-color:{sys_color}"></div></div>'
-            f'<div class="space-y-1.5">{"".join(rows)}</div>'
+            f'<div class="w-full h-2 rounded overflow-hidden mb-3" style="background-color: var(--bg-page); border: 1px solid var(--border-color);">'
+            f'<div class="h-full" style="width:{pct}%;background-color:{sys_color}"></div></div>'
+            f'<div>{"".join(rows)}</div>'
             f'</div>'
         )
 

@@ -70,6 +70,7 @@ def enrich_subcellular_data(
     for loc in all_locs:
         loc_key = loc.strip().lower()
         loc_type = "Main" if loc_key in main_set else "Additional"
+        semantic_color = "#0D9488" if loc_type == "Main" else "#4F46E5"
         if loc_key in ont_case_map:
             canonical_name, meta = ont_case_map[loc_key]
             svg_id = meta.get("svg_element_id", "cell-organelle-generic")
@@ -81,7 +82,7 @@ def enrich_subcellular_data(
                 "go_id": meta.get("go_id", "GO:0005575"),
                 "category": meta.get("category", "Cellular Component"),
                 "svg_element_id": svg_id,
-                "color": meta.get("color", "#64B5F6"),
+                "color": semantic_color,
                 "description": meta.get("description", "Eukaryotic subcellular compartment."),
             })
         else:
@@ -94,7 +95,7 @@ def enrich_subcellular_data(
                 "go_id": "GO:0005575",
                 "category": "Other / Unclassified",
                 "svg_element_id": svg_id,
-                "color": "#64748B",
+                "color": semantic_color,
                 "description": "Subcellular compartment annotated by the Human Protein Atlas.",
             })
 
@@ -124,25 +125,26 @@ def render_subcellular_svg(
         meta = next((v for k, v in ont.items() if v.get("svg_element_id") == svg_id), None)
         go_id = meta["go_id"] if meta else "GO:0005575"
         desc = meta["description"] if meta else "Eukaryotic cellular organelle."
-        color = meta["color"] if meta else "#64B5F6"
+        color = meta["color"] if meta else "#0D9488"
 
         if svg_id in active_by_svg_id:
             ann = active_by_svg_id[svg_id]
             loc_type = ann["localization_type"]
-            fill_color = ann["color"]
             if loc_type == "Main":
+                fill_color = "#0D9488"
                 cls = "organelle-node organelle-active-main"
-                stroke_attr = f'fill="{fill_color}" fill-opacity="0.72" stroke="{fill_color}" stroke-width="3" filter="url(#organelle-glow)"'
+                stroke_attr = f'fill="{fill_color}" fill-opacity="0.72" stroke="{fill_color}" stroke-width="2.5"'
             else:
+                fill_color = "#4F46E5"
                 cls = "organelle-node organelle-active-additional"
                 stroke_attr = (
-                    f'fill="{fill_color}" fill-opacity="0.45" stroke="{fill_color}" '
-                    'stroke-width="2.5" stroke-dasharray="6,4"'
+                    f'fill="{fill_color}" fill-opacity="0.48" stroke="{fill_color}" '
+                    'stroke-width="2" stroke-dasharray="6,4"'
                 )
         else:
             loc_type = "Not Detected"
             cls = "organelle-node organelle-inactive"
-            stroke_attr = 'fill="var(--organelle-inactive-fill, #e2e8f0)" fill-opacity="0.40" stroke="var(--organelle-inactive-stroke, #94a3b8)" stroke-width="1.5"'
+            stroke_attr = 'fill="var(--organelle-inactive-fill, #FAFAF9)" fill-opacity="0.45" stroke="var(--organelle-inactive-stroke, #787774)" stroke-width="1.25"'
 
         safe_name = html.escape(default_name, quote=True)
         safe_desc = html.escape(desc, quote=True)
@@ -154,19 +156,9 @@ def render_subcellular_svg(
 
     svg = f"""<div class="subcellular-schematic-wrapper relative w-full">
   <svg viewBox="0 0 820 520" class="w-full h-auto select-none" role="img" aria-label="Interactive Human Eukaryotic Cell Organelle Schematic">
-    <defs>
-      <filter id="organelle-glow" x="-20%" y="-20%" width="140%" height="140%">
-        <feGaussianBlur stdDeviation="4.5" result="blur" />
-        <feComposite in="SourceGraphic" in2="blur" operator="over" />
-      </filter>
-      <pattern id="additional-stripe" width="8" height="8" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
-        <line x1="0" y1="0" x2="0" y2="8" stroke="#64B5F6" stroke-width="3" stroke-opacity="0.5" />
-      </pattern>
-    </defs>
-
     <!-- Extracellular / Secreted Zone -->
     <g {style_attrs("cell-organelle-secreted", "Secreted")}>
-      <rect x="16" y="16" width="135" height="44" rx="8" />
+      <rect x="16" y="16" width="135" height="44" rx="6" />
       <text x="83" y="42" text-anchor="middle" font-size="11" fill="currentColor" class="pointer-events-none font-medium">Secreted Space</text>
     </g>
 
@@ -188,15 +180,15 @@ def render_subcellular_svg(
 
     <!-- Actin Filaments & Cytoskeleton Tracks -->
     <g {style_attrs("cell-organelle-actin", "Actin filaments")}>
-      <path d="M 185,155 Q 250,130 320,145" fill="none" stroke-width="3.5" />
-      <path d="M 195,380 Q 280,410 370,395" fill="none" stroke-width="3.5" />
+      <path d="M 185,155 Q 250,130 320,145" fill="none" stroke-width="3" />
+      <path d="M 195,380 Q 280,410 370,395" fill="none" stroke-width="3" />
     </g>
 
     <!-- Microtubules -->
     <g {style_attrs("cell-organelle-microtubules", "Microtubules")}>
-      <line x1="485" y1="195" x2="620" y2="140" stroke-width="3" />
-      <line x1="485" y1="195" x2="645" y2="235" stroke-width="3" />
-      <line x1="485" y1="195" x2="595" y2="335" stroke-width="3" />
+      <line x1="485" y1="195" x2="620" y2="140" stroke-width="2.5" />
+      <line x1="485" y1="195" x2="645" y2="235" stroke-width="2.5" />
+      <line x1="485" y1="195" x2="595" y2="335" stroke-width="2.5" />
     </g>
 
     <!-- Endoplasmic Reticulum (Perinuclear Cisternae Network) -->
@@ -261,7 +253,7 @@ def render_subcellular_svg(
     </g>
 
     <!-- Diagram Labels -->
-    <g font-family="sans-serif" font-size="11" fill="var(--text-secondary, #475569)" class="pointer-events-none font-semibold">
+    <g font-family="var(--font-sans, 'DM Sans', sans-serif)" font-size="11" fill="var(--text-secondary, #787774)" class="pointer-events-none font-semibold">
       <text x="355" y="160" text-anchor="middle">Nucleus / Nucleoplasm</text>
       <text x="332" y="252" text-anchor="middle" font-size="10">Nucleoli</text>
       <text x="548" y="238" text-anchor="middle">Golgi</text>

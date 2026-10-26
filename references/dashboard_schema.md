@@ -1,6 +1,6 @@
 # HPA Dashboard JSON Data Island Schema
 
-The standalone interactive HTML5 dashboard (`dashboard.html`) embeds a structured JSON payload inside `<script id="hpa-dashboard-data" type="application/json">`. This schema allows the dashboard to render completely offline via `file:///` without requiring an active web server or live API requests.
+The standalone interactive HTML5 dashboard (`dashboard.html`) embeds a structured JSON payload inside `<script id="hpa-dashboard-data" type="application/json">`. This schema allows the dashboard to render offline when opened directly from `./dashboard.html` or over HTTP with Server-Sent Events (SSE) without requiring live upstream API requests.
 
 ```json
 {
@@ -10,9 +10,19 @@ The standalone interactive HTML5 dashboard (`dashboard.html`) embeds a structure
   "gene_description": "tumor protein p53",
   "gene_synonyms": ["p53", "LFS1"],
   "validation_status": "Approved",
+  "system_theme": "dark",
   "rna_protein_agreement": {
     "reliability": "Approved",
     "description": "Consistency between RNA-seq and antibody staining"
+  },
+  "pipeline_provenance": {
+    "input_gene_symbol": "TP53",
+    "input_ensembl_id": "ENSG00000141510",
+    "tissues_evaluated": 44,
+    "organ_systems_mapped": 10,
+    "subcellular_compartments_mapped": 2,
+    "rate_limit_policy": "2.0 QPS (CC BY-SA 4.0 Verified)",
+    "host_system_theme": "dark"
   },
   "subcellular_summary": {
     "main_locations": ["Nucleoplasm"],

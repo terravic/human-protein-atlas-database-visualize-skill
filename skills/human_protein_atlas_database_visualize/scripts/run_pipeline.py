@@ -128,11 +128,15 @@ def run_pipeline(
     dashboard_path = out_dir / "dashboard.html"
     dashboard_path.write_text(dashboard_html, encoding="utf-8")
 
-    # Also update the workspace root dashboard.html for direct local viewing
+    # Also update the workspace root and nested skill dashboard.html for direct local viewing
     try:
-        root_dashboard_path = hpa_cli.resolve_workspace_root() / "dashboard.html"
-        if root_dashboard_path.resolve() != dashboard_path.resolve():
-            root_dashboard_path.write_text(dashboard_html, encoding="utf-8")
+        ws_root = hpa_cli.resolve_workspace_root()
+        for candidate in [
+            ws_root / "dashboard.html",
+            ws_root / "skills" / "human_protein_atlas_database_visualize" / "dashboard.html",
+        ]:
+            if candidate.parent.exists() and candidate.resolve() != dashboard_path.resolve():
+                candidate.write_text(dashboard_html, encoding="utf-8")
     except OSError:
         pass
 

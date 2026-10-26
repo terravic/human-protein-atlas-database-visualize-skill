@@ -50,6 +50,7 @@ class TestSkillComplianceAndSmoke(unittest.TestCase):
             PROJECT_ROOT / "LICENSE",
             PROJECT_ROOT / "SKILL_LICENSES.md",
             PROJECT_ROOT / "requirements.txt",
+            PROJECT_ROOT / "prd.md",
             PROJECT_ROOT / "documents" / "prd.md",
             PROJECT_ROOT / "assets" / "dashboard_schema.json",
             PROJECT_ROOT / "assets" / "skill_workflow_overview.png",
@@ -229,21 +230,36 @@ class TestEndToEndPipelineAndDashboard(unittest.TestCase):
             self.assertIn("10.1126/science.aal3321", html_text)
             self.assertIn("must not be used as clinical diagnostic or medical guidance", html_text)
 
-            btn_match = re.search(
-                r'<button id="theme-toggle-btn"[^>]*>(.*?)</button>',
-                html_text,
-                flags=re.DOTALL,
-            )
-            self.assertIsNotNone(btn_match, "Missing #theme-toggle-btn in dashboard.html")
-            btn_inner = btn_match.group(1)
-            self.assertIn('id="theme-icon-sun"', btn_inner)
-            self.assertIn('id="theme-icon-moon"', btn_inner)
-            stripped_non_svg = re.sub(r"<svg.*?</svg>", "", btn_inner, flags=re.DOTALL).strip()
-            self.assertEqual(stripped_non_svg, "", "Theme toggle button must contain only SVG icons")
+            for btn_id, expected_mode in [
+                ("theme-btn-light", "light"),
+                ("theme-btn-dark", "dark"),
+                ("theme-btn-system", "system"),
+            ]:
+                btn_match = re.search(
+                    rf'<button id="{btn_id}"[^>]*data-theme-mode="{expected_mode}"[^>]*>(.*?)</button>',
+                    html_text,
+                    flags=re.DOTALL,
+                )
+                self.assertIsNotNone(btn_match, f"Missing #{btn_id} in dashboard.html")
+                btn_inner = btn_match.group(1)
+                self.assertIn("<svg", btn_inner)
+                stripped_non_svg = re.sub(r"<svg.*?</svg>", "", btn_inner, flags=re.DOTALL).strip()
+                self.assertEqual(stripped_non_svg, "", f"#{btn_id} must contain only SVG icon")
+
+            for required_token in [
+                "#FAFAF9", "#FFFFFF", "#E7E5E4", "#1C1917", "#787774",
+                "#0D0E11", "#16171D", "#292A30", "#ECE8E2", "#9A9895",
+                "#0D9488", "#D97706", "#4F46E5", "#059669", "#E11D48",
+                "DM Sans", "Instrument Serif", "IBM Plex Mono",
+                "Structural Data Diagram", "Interactive Relationship Node Map",
+            ]:
+                self.assertIn(required_token, html_text, f"Missing required design token: {required_token}")
 
             self.assertIn('id="hpa-3d-physics-viewport"', html_text)
+            self.assertIn('id="hpa-relationship-node-map"', html_text)
             self.assertIn('id="concordance-scatter-viewport"', html_text)
             self.assertIn("pipeline_provenance", island_data)
+            self.assertIn("system_theme", island_data)
 
             root_dashboard = PROJECT_ROOT / "dashboard.html"
             self.assertTrue(root_dashboard.exists(), "Project root dashboard.html must exist for local testing")

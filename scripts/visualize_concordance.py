@@ -50,7 +50,6 @@ def parse_rna_ntpm_map(atlas_entry: Dict[str, Any]) -> Dict[str, float]:
             except (TypeError, ValueError):
                 continue
     elif isinstance(raw_rna, str) and raw_rna.strip():
-        # HPA string format e.g. "cerebral cortex: 14.2;liver: 5.8"
         for pair in re.split(r"[;,]", raw_rna):
             if ":" in pair:
                 t_name, val_str = pair.split(":", 1)
@@ -90,7 +89,6 @@ def evaluate_concordance(
         t_lower = t_name.lower()
         level = str(item.get("level", "Not detected")).strip()
         score = LEVEL_SCORES.get(level.lower(), 0)
-        # Estimate realistic fallback nTPM if live API omitted tissue-specific value
         default_ntpm = 22.0 if score >= 2 else (9.5 if score == 1 else 0.5)
         ntpm = round(float(ntpm_map.get(t_lower, default_ntpm)), 2)
 
@@ -149,38 +147,38 @@ def evaluate_concordance(
 
 
 def render_concordance_html(concordance: Dict[str, Any]) -> str:
-    """Render a 2x2 RNA-vs-Protein Concordance Quadrant summary block with Light/Dark theme support."""
+    """Render a flat single-level bento 2x2 RNA-vs-Protein Concordance Quadrant summary block."""
     q_counts = concordance.get("quadrant_counts", {})
     score = concordance.get("concordance_score", 0.0)
     cls_label = html.escape(str(concordance.get("concordance_classification", "")))
     rel = html.escape(str(concordance.get("reliability", "Approved")))
 
-    return f"""<div class="concordance-matrix-card dashboard-card p-5 shadow-sm" style="background-color: var(--bg-card); border: 1px solid var(--border-card); color: var(--text-primary);">
-  <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+    return f"""<div class="concordance-matrix-card dashboard-card p-5">
+  <div class="flex flex-wrap items-center justify-between gap-2 pb-4 border-b" style="border-color: var(--border-color);">
     <div>
-      <h3 class="text-base font-bold" style="color: var(--text-primary);">RNA-Seq (nTPM) vs. IHC Protein Concordance Matrix</h3>
-      <p class="text-xs" style="color: var(--text-secondary);">HPA Verification Status: <span id="conc-card-reliability" class="font-semibold" style="color: var(--text-primary);">{rel}</span></p>
+      <h3 class="text-base font-bold" style="color: var(--text-primary); margin:0;">RNA-Seq (nTPM) vs. IHC Protein Concordance Matrix</h3>
+      <p class="text-xs mt-1" style="color: var(--text-secondary); margin-bottom:0;">HPA Verification Status: <span id="conc-card-reliability" class="font-mono font-semibold" style="color: #059669;">{rel}</span></p>
     </div>
-    <div id="conc-card-score-badge" class="px-3 py-1 rounded-lg text-sm font-bold" style="background-color: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.35);">
+    <div id="conc-card-score-badge" class="px-3 py-1 rounded text-xs font-mono font-bold" style="border: 1px solid #059669; color: #059669;">
       Concordance Score: {score:.2f} ({cls_label})
     </div>
   </div>
-  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-    <div class="p-3.5 rounded-lg" style="background-color: rgba(16, 185, 129, 0.10); border: 1px solid rgba(16, 185, 129, 0.35);">
-      <div class="text-xs font-bold uppercase" style="color: #059669;">Concordant High (RNA &gt;= 10 nTPM &amp; IHC Detected)</div>
-      <div id="conc-q-high" class="text-2xl font-extrabold mt-1" style="color: var(--text-primary);">{q_counts.get("Concordant High", 0)} tissues</div>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
+    <div class="pt-1">
+      <div class="text-xs font-bold uppercase tracking-wider" style="color: #059669;">Concordant High (RNA &gt;= 10 nTPM &amp; IHC)</div>
+      <div id="conc-q-high" class="text-2xl font-mono font-semibold mt-1" style="color: var(--text-primary);">{q_counts.get("Concordant High", 0)} tissues</div>
     </div>
-    <div class="p-3.5 rounded-lg" style="background-color: rgba(245, 158, 11, 0.10); border: 1px solid rgba(245, 158, 11, 0.35);">
-      <div class="text-xs font-bold uppercase" style="color: #d97706;">High Protein Stability / Secretion (IHC High/Med, RNA &lt; 10 nTPM)</div>
-      <div id="conc-q-stability" class="text-2xl font-extrabold mt-1" style="color: var(--text-primary);">{q_counts.get("High Protein Stability / Secretion", 0)} tissues</div>
+    <div class="pt-1">
+      <div class="text-xs font-bold uppercase tracking-wider" style="color: #D97706;">High Protein Stability (RNA &lt; 10 nTPM)</div>
+      <div id="conc-q-stability" class="text-2xl font-mono font-semibold mt-1" style="color: var(--text-primary);">{q_counts.get("High Protein Stability / Secretion", 0)} tissues</div>
     </div>
-    <div class="p-3.5 rounded-lg" style="background-color: rgba(59, 130, 246, 0.10); border: 1px solid rgba(59, 130, 246, 0.35);">
-      <div class="text-xs font-bold uppercase" style="color: #2563eb;">Concordant Low / Absent (Low RNA &amp; Low/Absent IHC)</div>
-      <div id="conc-q-low" class="text-2xl font-extrabold mt-1" style="color: var(--text-primary);">{q_counts.get("Concordant Low/Absent", 0)} tissues</div>
+    <div class="pt-1">
+      <div class="text-xs font-bold uppercase tracking-wider" style="color: #0D9488;">Concordant Low / Absent</div>
+      <div id="conc-q-low" class="text-2xl font-mono font-semibold mt-1" style="color: var(--text-primary);">{q_counts.get("Concordant Low/Absent", 0)} tissues</div>
     </div>
-    <div class="p-3.5 rounded-lg" style="background-color: rgba(244, 63, 94, 0.10); border: 1px solid rgba(244, 63, 94, 0.35);">
-      <div class="text-xs font-bold uppercase" style="color: #e11d48;">Potential Translational Repression (RNA &gt;= 15 nTPM, IHC Not Detected)</div>
-      <div id="conc-q-repression" class="text-2xl font-extrabold mt-1" style="color: var(--text-primary);">{q_counts.get("Potential Translational Repression", 0)} tissues</div>
+    <div class="pt-1">
+      <div class="text-xs font-bold uppercase tracking-wider" style="color: #E11D48;">Potential Translational Repression</div>
+      <div id="conc-q-repression" class="text-2xl font-mono font-semibold mt-1" style="color: var(--text-primary);">{q_counts.get("Potential Translational Repression", 0)} tissues</div>
     </div>
   </div>
 </div>"""
