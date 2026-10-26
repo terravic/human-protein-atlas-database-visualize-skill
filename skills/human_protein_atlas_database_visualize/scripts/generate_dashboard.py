@@ -608,6 +608,7 @@ def render_dashboard_html(payload: Dict[str, Any], title: Optional[str] = None) 
       cursor: pointer;
       font-family: var(--font-sans);
       font-weight: 500;
+      white-space: nowrap;
       transition: color 0.15s ease, border-color 0.15s ease;
     }}
     .tab-button:hover {{
@@ -754,24 +755,24 @@ def render_dashboard_html(payload: Dict[str, Any], title: Optional[str] = None) 
     </section>
 
     <!-- Interactive Navigation Tabs -->
-    <nav class="dashboard-card px-4 pt-2 flex flex-wrap gap-3 border-b text-xs" role="tablist">
+    <nav class="dashboard-card px-4 pt-2 flex flex-wrap gap-2 md:gap-3 border-b text-xs overflow-x-auto" role="tablist">
       <button id="tab-btn-physics3d" type="button" onclick="switchTab('physics3d')" class="tab-button active py-3 px-2.5">
-        1. Structural Data Diagram &amp; Node Map
+        1. 3D Structure
       </button>
       <button id="tab-btn-subcellular" type="button" onclick="switchTab('subcellular')" class="tab-button py-3 px-2.5">
-        2. Subcellular Organelle &amp; GO Map
+        2. Subcellular
       </button>
       <button id="tab-btn-anatomical" type="button" onclick="switchTab('anatomical')" class="tab-button py-3 px-2.5">
-        3. Anatomical IHC Heatmap &amp; Atlas
+        3. Tissue IHC
       </button>
       <button id="tab-btn-concordance" type="button" onclick="switchTab('concordance')" class="tab-button py-3 px-2.5">
-        4. RNA vs. Protein Concordance
+        4. Concordance
       </button>
       <button id="tab-btn-pathology" type="button" onclick="switchTab('pathology')" class="tab-button py-3 px-2.5">
-        5. Cancer &amp; Pathology Profile
+        5. Pathology
       </button>
       <button id="tab-btn-explorer" type="button" onclick="switchTab('explorer')" class="tab-button py-3 px-2.5">
-        6. Tabular Data Explorer
+        6. Data Explorer
       </button>
     </nav>
 
